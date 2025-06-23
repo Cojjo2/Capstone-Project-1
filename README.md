@@ -1,5 +1,8 @@
 Pup Pantry – Capstone Project Proposal
+
 A full-stack web application to help dog owners filter food and treats by ingredient, making it easier to avoid harmful or allergenic substances.
+
+---
 
 Project Title: Pup Pantry
 Student Name: Ross Cozzo
