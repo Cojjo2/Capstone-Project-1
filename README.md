@@ -291,3 +291,13 @@ Conclusion
 Pup Pantry was born from a personal need—to make it easier and safer to shop for my own dog. Through this project, I aim to create a tool that helps dog owners quickly filter out harmful ingredients and discover better food and treat options. This app will combine everything I’ve learned so far in the program: React with Vite for the frontend, Node.js and Express for the backend, and MongoDB for the database.
 
 By focusing on a clean user experience, real-world functionality, and manageable development scope, I believe Pup Pantry will not only meet the Capstone requirements but also serve as a meaningful portfolio piece. I’m excited to build something that matters to me and could benefit many other pet owners like myself.
+
+
+
+
+
+## Step 3: Frontend Control Flow
+
+The frontend flow diagram shows the planned navigation between main pages and key user actions in Pup Pantry.  
+You can view the diagrams here:  
+[Frontend Flow Folder](./docs/Frontend%20Flow/)
