@@ -100,3 +100,13 @@
   "email": "string",
   "password": "string"
 }
+
+**4.1.4 PATCH /api/users/:id** — Update profile  
+- Auth: Yes (user can update own profile, admin can update any)  
+- Body (allowed partial fields):
+```json
+{
+  "name": "string",
+  "email": "string",
+  "password": "string"
+}
