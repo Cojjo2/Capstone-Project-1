@@ -29,3 +29,15 @@
   }
 }
 
+## 2) Resources 
+> List the core resources you modeled. One line each.
+
+- Users — registered dog owners
+- Dogs — pets owned by users
+- Products — dog foods, treats, chews, supplements
+- Ingredients — individual ingredients linked to products (and dog restrictions)
+- Stores — locations or online shops stocking products
+- Brands — product manufacturers
+- Reviews — user-written feedback on products
+- Favorites — saved products by users
+- Inventory — link between stores and products
