@@ -110,3 +110,13 @@
   "email": "string",
   "password": "string"
 }
+
+**4.1.5 DELETE /api/users/:id** — Delete  
+- Auth: Yes (user can delete own account, admin can delete any)  
+- Behavior: Soft delete (mark as inactive)  
+- Success 204 Response:  
+  - No content returned  
+- Errors:  
+  - 401/403 (unauthorized/forbidden)  
+  - 404 (user not found)  
+  - 500 (server error)  
