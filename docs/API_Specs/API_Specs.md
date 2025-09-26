@@ -120,3 +120,20 @@
   - 401/403 (unauthorized/forbidden)  
   - 404 (user not found)  
   - 500 (server error)  
+
+### 4.2) Dogs (`/api/dogs`)
+
+**4.2.1 GET /api/dogs** — List  
+- Query params:  
+  - `ownerId` (string, optional) → filter dogs by user  
+  - `breed` (string, optional)  
+  - `page`, `limit`, `sort`  
+- Auth: Yes (only logged-in users can list dogs)  
+- Success 200 Response:
+```json
+{
+  "total": 0,
+  "page": 1,
+  "pages": 0,
+  "items": []
+}
