@@ -183,3 +183,21 @@
   - 401/403 (unauthorized/forbidden)  
   - 404 (dog not found)  
   - 500 (server error)  
+
+### 4.3) Products (`/api/products`)
+
+**4.3.1 GET /api/products** — List  
+- Query params:  
+  - `brandId` (string, optional) → filter by brand  
+  - `storeId` (string, optional) → filter by store availability  
+  - `ingredientId` (string, optional) → filter by ingredient  
+  - `page`, `limit`, `sort`  
+- Auth: No (public endpoint)  
+- Success 200 Response:
+```json
+{
+  "total": 0,
+  "page": 1,
+  "pages": 0,
+  "items": []
+}
