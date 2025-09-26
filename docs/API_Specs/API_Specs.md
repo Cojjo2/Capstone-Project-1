@@ -137,3 +137,17 @@
   "pages": 0,
   "items": []
 }
+
+**4.2.2 GET /api/dogs/:id** — Retrieve one  
+- Params:  
+  - `id` (string, MongoDB ObjectId)  
+- Auth: Yes (owner can view own dog, admin can view any)  
+- Success 200 Response:
+```json
+{
+  "_id": "string",
+  "name": "string",
+  "breed": "string",
+  "age": 3,
+  "ownerId": "string"
+}
