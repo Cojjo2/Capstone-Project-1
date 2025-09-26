@@ -151,3 +151,14 @@
   "age": 3,
   "ownerId": "string"
 }
+
+**4.2.3 POST /api/dogs** — Add a dog profile  
+- Auth: Yes (must be logged in)  
+- Body (schema summary):
+```json
+{
+  "name": "string",
+  "breed": "string",
+  "age": 3,
+  "restrictions": ["ingredientId1", "ingredientId2"]
+}
