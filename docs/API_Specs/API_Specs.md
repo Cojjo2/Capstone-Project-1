@@ -77,3 +77,16 @@
   "pages": 0,
   "items": []
 }
+
+**4.1.2 GET /api/users/:id** — Retrieve one  
+- Params:  
+  - `id` (string, MongoDB ObjectId)  
+- Auth: Yes (user can see own profile, admin can see any)  
+- Success 200 Response:
+```json
+{ 
+  "_id": "string",
+  "name": "string",
+  "email": "string",
+  "createdAt": "2025-09-26T00:00:00.000Z"
+}
