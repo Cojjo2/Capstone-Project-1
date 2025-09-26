@@ -58,3 +58,22 @@
 | Dogs      | DELETE | /api/dogs/:id         | Remove dog profile       | Yes     |       |
 
 (Add similar rows later for Products, Ingredients, Stores, Brands, Reviews, Favorites, Inventory.)
+
+## 4) Endpoint Specs 
+
+### 4.1) Users (`/api/users`)
+
+**4.1.1 GET /api/users** — List  
+- Query params:  
+  - `page` (int, optional, default 1)  
+  - `limit` (int, optional, default 20, max 100)  
+  - `sort` (string, e.g., `name` or `-createdAt`)  
+- Auth: Admin only  
+- Success 200 Response:
+```json
+{
+  "total": 0,
+  "page": 1,
+  "pages": 0,
+  "items": []
+}
