@@ -41,3 +41,20 @@
 - Reviews — user-written feedback on products
 - Favorites — saved products by users
 - Inventory — link between stores and products
+
+## 3) Endpoints Overview (table)
+| Resource  | Method | Path                  | Purpose (1 line)         | Auth?   | Notes |
+|-----------|--------|-----------------------|--------------------------|---------|-------|
+| Users     | GET    | /api/users            | List all users           | Admin   |       |
+| Users     | GET    | /api/users/:id        | Get one user by id       | Yes     |       |
+| Users     | POST   | /api/users            | Register new user        | No      | Validation required |
+| Users     | PATCH  | /api/users/:id        | Update user profile      | Yes     | Partial updates |
+| Users     | DELETE | /api/users/:id        | Delete user account      | Yes     | Soft delete |
+
+| Dogs      | GET    | /api/dogs             | List all dogs            | Yes     | Filter by owner, breed, etc. |
+| Dogs      | GET    | /api/dogs/:id         | Get one dog by id        | Yes     |       |
+| Dogs      | POST   | /api/dogs             | Add a dog profile        | Yes     |       |
+| Dogs      | PATCH  | /api/dogs/:id         | Update dog profile       | Yes     |       |
+| Dogs      | DELETE | /api/dogs/:id         | Remove dog profile       | Yes     |       |
+
+(Add similar rows later for Products, Ingredients, Stores, Brands, Reviews, Favorites, Inventory.)
