@@ -173,3 +173,13 @@
   "age": 4,
   "restrictions": ["ingredientId3"]
 }
+
+**4.2.5 DELETE /api/dogs/:id** — Remove dog profile  
+- Auth: Yes (owner can delete own dog, admin can delete any)  
+- Behavior: Soft delete (mark as inactive)  
+- Success 204 Response:  
+  - No content returned  
+- Errors:  
+  - 401/403 (unauthorized/forbidden)  
+  - 404 (dog not found)  
+  - 500 (server error)  
