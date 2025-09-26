@@ -162,3 +162,14 @@
   "age": 3,
   "restrictions": ["ingredientId1", "ingredientId2"]
 }
+
+**4.2.4 PATCH /api/dogs/:id** — Update dog profile  
+- Auth: Yes (owner can update own dog, admin can update any)  
+- Body (allowed partial fields):
+```json
+{
+  "name": "string",
+  "breed": "string",
+  "age": 4,
+  "restrictions": ["ingredientId3"]
+}
