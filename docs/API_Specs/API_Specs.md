@@ -90,3 +90,13 @@
   "email": "string",
   "createdAt": "2025-09-26T00:00:00.000Z"
 }
+
+**4.1.3 POST /api/users** — Register  
+- Auth: No  
+- Body (schema summary):
+```json
+{
+  "name": "string",
+  "email": "string",
+  "password": "string"
+}
