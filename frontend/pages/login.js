@@ -19,12 +19,20 @@ export default function LoginPage() {
     try {
       const data = await api.post("/auth/login", { email, password });
       const token = data?.token;
-      if (token && typeof window !== "undefined") {
+
+      if (!token) throw new Error("No token returned from server.");
+
+      if (typeof window !== "undefined") {
         localStorage.setItem("token", token);
+        // Notify same-tab listeners (Header) immediately
+        window.dispatchEvent(new Event("pp-auth"));
+        // Also ping 'storage' to update any storage listeners
+        window.dispatchEvent(new Event("storage"));
       }
+
       setOk("Logged in. Redirecting…");
-      // tiny delay so user can read the message
-      setTimeout(() => router.push("/"), 600);
+      // Replace so Back doesn't return to login
+      router.replace("/");
     } catch (error) {
       setErr(error?.message || "Login failed");
     } finally {
