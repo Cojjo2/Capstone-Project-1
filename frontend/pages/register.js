@@ -21,19 +21,27 @@ export default function RegisterPage() {
       if (!email.trim()) throw new Error("Email is required.");
       if (!pw || pw.length < 8)
         throw new Error("Password must be at least 8 characters.");
+
       const res = await api.post("/auth/register", {
         name: name.trim(),
         email: email.trim(),
         password: pw,
       });
-      if (res?.token) {
-        localStorage.setItem("token", res.token);
-        setMsg("Account created. Redirecting…");
-        // small pause so users can see the message, then go to profile
-        setTimeout(() => router.push("/profile"), 300);
-      } else {
-        throw new Error("Unexpected response.");
+
+      const token = res?.token;
+      if (!token) throw new Error("No token returned from server.");
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("token", token);
+        // Notify same-tab listeners (Header) immediately
+        window.dispatchEvent(new Event("pp-auth"));
+        // Also ping 'storage' to update any storage listeners
+        window.dispatchEvent(new Event("storage"));
       }
+
+      setMsg("Account created. Redirecting…");
+      // Send new user to profile (replace to avoid back-nav to register)
+      router.replace("/profile");
     } catch (e) {
       setMsg(e?.message || "Registration failed.");
     } finally {
