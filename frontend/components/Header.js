@@ -15,30 +15,49 @@ function getToken() {
 export default function Header() {
   const router = useRouter();
 
-  // Hydration-safe auth state
+  // Hydration-safe mount + auth state
   const [mounted, setMounted] = useState(false);
   const [hasToken, setHasToken] = useState(false);
 
+  // Mark as mounted (avoids SSR/CSR mismatch)
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Keep auth state in sync:
+  // - on mount
+  // - when other tabs change localStorage ('storage' event)
+  // - after Next.js route changes in the same tab
+  // - when our app dispatches a custom 'pp-auth' event
   useEffect(() => {
     if (!mounted) return;
 
     const sync = () => setHasToken(!!getToken());
     sync();
 
-    // reflect login/logout from other tabs too
-    const onStorage = () => sync();
+    const onStorage = () => sync();                // other tabs
+    const onAuth = () => sync();                   // same-tab custom event
+    const onRoute = () => sync();                  // after router.push/replace
+
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, [mounted]);
+    window.addEventListener("pp-auth", onAuth);
+    router.events.on("routeChangeComplete", onRoute);
+
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("pp-auth", onAuth);
+      router.events.off("routeChangeComplete", onRoute);
+    };
+  }, [mounted, router.events]);
 
   const handleLogout = () => {
     try {
       localStorage.removeItem("token");
       localStorage.removeItem("pp_selected_dog");
+      // notify same-tab listeners immediately
+      window.dispatchEvent(new Event("pp-auth"));
+      // also ping 'storage' so any storage-based listeners update
+      window.dispatchEvent(new Event("storage"));
     } catch {}
     setHasToken(false);
     router.push("/login");
@@ -67,9 +86,18 @@ export default function Header() {
           minWidth: 240,
         }}
       >
-        <Link href="/" style={{ fontWeight: 700 }}>Pup Pantry</Link>
+        <Link href="/" style={{ fontWeight: 700 }}>
+          Pup Pantry
+        </Link>
 
-        <nav style={{ display: "flex", gap: "0.75rem", alignItems: "center", flexWrap: "wrap" }}>
+        <nav
+          style={{
+            display: "flex",
+            gap: "0.75rem",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
           <Link href="/">Home</Link>
           <Link href="/products">Products</Link>
           <Link href="/stores">Stores</Link>
@@ -116,7 +144,14 @@ export default function Header() {
           )
         )}
 
-        <div style={{ width: "100%", textAlign: "right", fontSize: 12, color: "#666" }}>
+        <div
+          style={{
+            width: "100%",
+            textAlign: "right",
+            fontSize: 12,
+            color: "#666",
+          }}
+        >
           API: <code>{process.env.NEXT_PUBLIC_API_BASE_URL}</code>
         </div>
       </div>
